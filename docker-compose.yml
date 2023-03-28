@@ -1,0 +1,37 @@
+version: "3"
+services:
+  website:
+    build:
+      context: ./bin/php56
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    volumes:
+      - ./website/html:/var/www/html/
+      - ./config/ssl:/etc/apache2/ssl/
+      - ./config/apache/apache.conf:/etc/apache2/sites-available/000-default.conf
+    networks:
+      - mynetwork
+  database:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./config/initdb:/docker-entrypoint-initdb.d
+      - ./database:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
+
