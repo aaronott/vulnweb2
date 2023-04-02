@@ -6,9 +6,6 @@ define('DB_USERNAME', $_ENV['DB_USER']);
 define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
 define('DB_NAME', $_ENV['DB_NAME']);
 
-// Start the session (if not already started)
-session_start();
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection

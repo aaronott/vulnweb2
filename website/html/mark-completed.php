@@ -1,4 +1,6 @@
 <?php
+// Start the session (if not already started)
+session_start();
 
 // Include the database connection file
 require_once "config.php";
