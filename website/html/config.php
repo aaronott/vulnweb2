@@ -1,12 +1,12 @@
 <?php
 
 // Database credentials
-define('DB_SERVER', 'database');
-define('DB_USERNAME', $_ENV['DB_USER']);
-define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
-define('DB_NAME', $_ENV['DB_NAME']);
+$host = 'database';
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASSWORD');
+$dbname = getenv('DB_NAME');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $user, $pass, $dbname);
 
 // Check connection
 if($conn === false){
