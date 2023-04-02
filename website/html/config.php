@@ -6,10 +6,12 @@ define('DB_USERNAME', $_ENV['DB_USER']);
 define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
 define('DB_NAME', $_ENV['DB_NAME']);
 
-// Attempt to connect to MySQL database
-$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// Start the session (if not already started)
+session_start();
+
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
-if($mysqli === false){
+if($conn === false){
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
