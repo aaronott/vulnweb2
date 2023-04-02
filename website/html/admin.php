@@ -1,3 +1,8 @@
+<?php
+// Include the database connection file
+require_once "config.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +23,6 @@
 		</thead>
 		<tbody>
 			<?php
-
-            // Include the database connection file
-            require_once "config.php";
-
 			// Get all users from the database
 			$sql = "SELECT * FROM users";
 
@@ -49,7 +50,7 @@
 			    echo "<tr><td colspan='5'>No users found.</td></tr>";
 			}
 
-			$conn->close();
+			// $conn->close();
 
 			?>
 		</tbody>
@@ -85,7 +86,7 @@
                     echo "<td>";
                     echo "<a href='edit-watering.php?id=" . $row['id'] . "'>Edit</a>";
                     echo " | ";
-                    echo "<a href='delete-watering.php?id=" . $row['id'] . "' onclick='return confirm("Are you sure you want to delete this watering?")'>Delete</a>";
+                    echo "<a href='delete-watering.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this watering?\")'>Delete</a>";
                     echo "</td>";
                     echo "</tr>";
                     }

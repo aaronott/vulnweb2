@@ -9,9 +9,9 @@ CREATE TABLE users (
 
 -- Insert sample data into the users table
 INSERT INTO users (name, email, password, role)
-VALUES ('John Doe', 'johndoe@example.com', 'password123', 'plant owner'),
-	   ('Jane Smith', 'janesmith@example.com', 'password456', 'plant waterer'),
-	   ('Admin', 'admin@example.com', 'adminpassword', 'admin');
+VALUES ('John Doe', 'johndoe@example.com', '$2y$10$dP8xW2AyJ7jjS9XjAST.aOV/XzAGh1Q8DENQe2Gi3b1KJ.thOXA6W', 'plant owner'), -- password123
+	   ('Jane Smith', 'janesmith@example.com', '$2y$10$1A9zFecBBL7cNvnEzRzeK.ZWubL/g8a4OLVRu0lxw9ppTfqBjKuY6', 'plant waterer'), -- password456
+	   ('Admin', 'admin@example.com', '$2y$10$gENKOnummoDOD7YDyXOSTeY1ybxVVLAtXR8ZI.De9BT0GAdhDoYWq', 'admin'); -- adminpassword
 
 -- Create the watering table
 CREATE TABLE watering (
