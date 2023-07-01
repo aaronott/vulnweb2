@@ -27,33 +27,57 @@
 	</section><!--  end hero section  -->
 
 
-	<section class="listings">
+	<section class="search">
 		<div class="wrapper">
-			<ul class="properties_list">
+		<div id="fom">
+			<form method="post">
+			<h3 style="text-align:center; color: #000099; font-weight:bold; text-decoration:underline">Admin Login Area</h3>
+				<table height="100" align="center">
+					<tr>
+						<td>Email Address:</td>
+						<td><input type="text" name="uname" placeholder="Enter Username" required></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" name="pass" placeholder="Enter Password" required></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align:center"><input type="submit" name="login" value="Login Here"></td>
+					</tr>
+				</table>
+			</form>
 			<?php
-						include 'includes/config.php';
-						$sel = "SELECT * FROM cars WHERE status = 'Available'";
-						$rs = $conn->query($sel);
-						while($rws = $rs->fetch_assoc()){
-			?>
-				<li>
-					<a href="book_car.php?id=<?php echo $rws['car_id'] ?>">
-						<img class="thumb" src="cars/<?php echo $rws['image'];?>" width="300" height="200">
-					</a>
-					<span class="price"><?php echo 'Kshs.'.$rws['hire_cost'];?></span>
-					<div class="property_details">
-						<h1>
-							<a href="book_car.php?id=<?php echo $rws['car_id'] ?>"><?php echo 'Car Make>'.$rws['car_type'];?></a>
-						</h1>
-						<h2>Car Name/Model: <span class="property_size"><?php echo $rws['car_name'];?></span></h2>
-					</div>
-				</li>
-			<?php
+				if(isset($_POST['login'])){
+					include 'includes/config.php';
+					
+					$uname = $_POST['uname'];
+					$pass = $_POST['pass'];
+					
+					$query = "SELECT * FROM admin WHERE uname = '$uname' AND pass = '$pass'";
+					$rs = $conn->query($query);
+					$num = $rs->num_rows;
+					$rows = $rs->fetch_assoc();
+					if($num > 0){
+						session_start();
+						$_SESSION['uname'] = $rows['uname'];
+						$_SESSION['pass'] = $rows['pass'];
+						echo "<script type = \"text/javascript\">
+									alert(\"Login Successful.................\");
+									window.location = (\"admin/index.php\")
+									</script>";
+					} else{
+						echo "<script type = \"text/javascript\">
+									alert(\"Login Failed. Try Again................\");
+									window.location = (\"login.php\")
+									</script>";
+					}
 				}
 			?>
-			</ul>
+			</div>
+			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
 		</div>
-	</section>	<!--  end listing section  -->
+
+	</section><!--  end search section  -->
 
 	<footer>
 		<div class="wrapper footer">
@@ -101,7 +125,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Felix Kiamba.
+			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Consi.
 		</div>
 	</footer><!--  end footer  -->
 	

@@ -9,7 +9,15 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-
+	<style type="text/css">
+		.status{
+			font-size: 20px;
+		}
+		.txt{
+			width: 600px;
+			height: 200px;
+		}
+	</style>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
@@ -29,28 +37,48 @@
 
 	<section class="listings">
 		<div class="wrapper">
+		<h2 style="text-decoration:underline">Message Admin Here</h2>
 			<ul class="properties_list">
-			<?php
+			<form method="post">
+				<table>
+					<tr>
+						<td style="color: #003300; font-weight: bold; font-size: 24px">Enter Your Message Here:</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea name="message" placeholder="Enter Message Here" class="txt"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="submit" name="send" value="Send Message"></td>
+					</tr>
+				</table>
+			</form>
+				<?php
+					if(isset($_POST['send'])){
 						include 'includes/config.php';
-						$sel = "SELECT * FROM cars WHERE status = 'Available'";
-						$rs = $conn->query($sel);
-						while($rws = $rs->fetch_assoc()){
-			?>
-				<li>
-					<a href="book_car.php?id=<?php echo $rws['car_id'] ?>">
-						<img class="thumb" src="cars/<?php echo $rws['image'];?>" width="300" height="200">
-					</a>
-					<span class="price"><?php echo 'Kshs.'.$rws['hire_cost'];?></span>
-					<div class="property_details">
-						<h1>
-							<a href="book_car.php?id=<?php echo $rws['car_id'] ?>"><?php echo 'Car Make>'.$rws['car_type'];?></a>
-						</h1>
-						<h2>Car Name/Model: <span class="property_size"><?php echo $rws['car_name'];?></span></h2>
-					</div>
-				</li>
-			<?php
-				}
-			?>
+						
+						$message = $_POST['message'];
+						
+						$qry = "INSERT INTO message (message,client_id,time,status)
+							VALUES('$message','$_SESSION[email]',NOW(),'Unread')";
+							$result = $conn->query($qry);
+							if($result == TRUE){
+								echo "<script type = \"text/javascript\">
+											alert(\"Message Successfully Send\");
+											window.location = (\"success.php\")
+											</script>";
+							} else{
+								echo "<script type = \"text/javascript\">
+											alert(\"Message Not Send. Try Again\");
+											window.location = (\"message_admin.php\")
+											</script>";
+							}
+					}
+				?>
 			</ul>
 		</div>
 	</section>	<!--  end listing section  -->
@@ -101,7 +129,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Felix Kiamba.
+			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Consi.
 		</div>
 	</footer><!--  end footer  -->
 	

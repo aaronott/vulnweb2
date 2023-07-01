@@ -27,31 +27,49 @@
 	</section><!--  end hero section  -->
 
 
+	<section class="search">
+		<div class="wrapper">
+			<form action="#" method="post">
+				<input type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
+				<input type="submit" id="submit_search" name="submit_search"/>
+			</form>
+			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
+		</div>
+
+		<div class="advanced_search">
+			<div class="wrapper">
+				<span class="arrow"></span>
+				<form action="#" method="post">
+					<div class="search_fields">
+						<input type="text" class="float" id="check_in_date" name="check_in_date" placeholder="Check In Date"  autocomplete="off">
+
+						<hr class="field_sep float"/>
+
+						<input type="text" class="float" id="check_out_date" name="check_out_date" placeholder="Check Out Date"  autocomplete="off">
+					</div>
+					<div class="search_fields">
+						<input type="text" class="float" id="min_price" name="min_price" placeholder="Min. Price"  autocomplete="off">
+
+						<hr class="field_sep float"/>
+
+						<input type="text" class="float" id="max_price" name="max_price" placeholder="Max. price"  autocomplete="off">
+					</div>
+					<input type="text" id="keywords" name="keywords" placeholder="Keywords"  autocomplete="off">
+					<input type="submit" id="submit_search" name="submit_search"/>
+				</form>
+			</div>
+		</div><!--  end advanced search section  -->
+	</section><!--  end search section  -->
+
+
 	<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
-			<?php
-						include 'includes/config.php';
-						$sel = "SELECT * FROM cars WHERE status = 'Available'";
-						$rs = $conn->query($sel);
-						while($rws = $rs->fetch_assoc()){
-			?>
-				<li>
-					<a href="book_car.php?id=<?php echo $rws['car_id'] ?>">
-						<img class="thumb" src="cars/<?php echo $rws['image'];?>" width="300" height="200">
-					</a>
-					<span class="price"><?php echo 'Kshs.'.$rws['hire_cost'];?></span>
-					<div class="property_details">
-						<h1>
-							<a href="book_car.php?id=<?php echo $rws['car_id'] ?>"><?php echo 'Car Make>'.$rws['car_type'];?></a>
-						</h1>
-						<h2>Car Name/Model: <span class="property_size"><?php echo $rws['car_name'];?></span></h2>
-					</div>
-				</li>
-			<?php
-				}
-			?>
+				<h2 style="text-align:center; color:#FF0000; font-family: 'Courier New', Courier, monospace">Thank you for sending a request to Sonko Rescue Team. 
+				We will get back to you once we verify your payment.<br>
+				You can login to view the processing status of your request using your email and the National ID Number as password.</h2>
 			</ul>
+			
 		</div>
 	</section>	<!--  end listing section  -->
 
@@ -101,7 +119,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Felix Kiamba.
+			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Consi.
 		</div>
 	</footer><!--  end footer  -->
 	

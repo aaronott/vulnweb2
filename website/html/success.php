@@ -9,7 +9,15 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-
+	<style type="text/css">
+		.status{
+			font-size: 20px;
+		}
+		.txt{
+			width: 600px;
+			height: 200px;
+		}
+	</style>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
@@ -29,28 +37,9 @@
 
 	<section class="listings">
 		<div class="wrapper">
+		<h2 style="text-align: center; color:#CC0000">Thank you for contacting us. We will give you a call shortly.</h2>
 			<ul class="properties_list">
-			<?php
-						include 'includes/config.php';
-						$sel = "SELECT * FROM cars WHERE status = 'Available'";
-						$rs = $conn->query($sel);
-						while($rws = $rs->fetch_assoc()){
-			?>
-				<li>
-					<a href="book_car.php?id=<?php echo $rws['car_id'] ?>">
-						<img class="thumb" src="cars/<?php echo $rws['image'];?>" width="300" height="200">
-					</a>
-					<span class="price"><?php echo 'Kshs.'.$rws['hire_cost'];?></span>
-					<div class="property_details">
-						<h1>
-							<a href="book_car.php?id=<?php echo $rws['car_id'] ?>"><?php echo 'Car Make>'.$rws['car_type'];?></a>
-						</h1>
-						<h2>Car Name/Model: <span class="property_size"><?php echo $rws['car_name'];?></span></h2>
-					</div>
-				</li>
-			<?php
-				}
-			?>
+			
 			</ul>
 		</div>
 	</section>	<!--  end listing section  -->
@@ -101,7 +90,7 @@
 		</div>
 
 		<div class="copyrights wrapper">
-			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Felix Kiamba.
+			Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Consi.
 		</div>
 	</footer><!--  end footer  -->
 	

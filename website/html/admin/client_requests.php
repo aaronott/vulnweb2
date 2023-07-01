@@ -6,8 +6,8 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<script type="text/javascript">
 		function sureToApprove(id){
-			if(confirm("Are you sure you want to delete this message?")){
-				window.location.href ='delete_msg.php?id='+id;
+			if(confirm("Are you sure you want to Approve this request?")){
+				window.location.href ='approve.php?id='+id;
 			}
 		}
 	</script>
@@ -20,8 +20,6 @@
 		<?php
 			include 'menu.php';
 		?>
-		</div>
-		<!-- End Main Nav -->
 	</div>
 </div>
 
@@ -31,7 +29,7 @@
 		<div class="small-nav">
 			<a href="index.php">Dashboard</a>
 			<span>&gt;</span>
-			Client Messages
+			Client Requests
 		</div>
 		
 		<br />
@@ -44,9 +42,9 @@
 				<div class="box">
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2 class="left">Client Messages</h2>
+						<h2 class="left">Client Requests</h2>
 						<div class="right">
-							<label>search messages</label>
+							<label>search requests</label>
 							<input type="text" class="field small-field" />
 							<input type="submit" class="button" value="search" />
 						</div>
@@ -56,23 +54,28 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<th width="13"><input type="checkbox" class="checkbox" /></th>
-								<th>Message Content</th>
-								<th>Time Send</th>
+								<th>Client Name</th>
+								<th>Client Phone</th>
+								<th>Car Booked</th>
+								<th>Mpesa ID</th>
 								<th>Status</th>
 								<th width="110" class="ac">Content Control</th>
 							</tr>
 							<?php
 								include '../includes/config.php';
-								$select = "SELECT * FROM message";
+								$select = "SELECT client.client_id,client.fname,client.phone,cars.car_name,cars.hire_cost,client.status 
+										FROM client JOIN cars ON client.car_id=cars.car_id";
 								$result = $conn->query($select);
 								while($row = $result->fetch_assoc()){
 							?>
 							<tr>
 								<td><input type="checkbox" class="checkbox" /></td>
-								<td><h3><a href="#"><?php echo $row['message'] ?></a></h3></td>
-								<td><?php echo $row['time'] ?></td>
+								<td><h3><a href="#"><?php echo $row['fname'] ?></a></h3></td>
+								<td><h3><a href="#"><?php echo $row['phone'] ?></a></h3></td>
+								<td><?php echo $row['car_name'] ?></td>
+								<td><a href="#"><?php echo $row['hire_cost'] ?></a></td>
 								<td><a href="#"><?php echo $row['status'] ?></a></td>
-								<td><a href="javascript:sureToApprove(<?php echo $row['msg_id'];?>)" class="ico del">Delete</a><a href="#" class="ico edit">Edit</a></td>
+								<td><a href="javascript:sureToApprove(<?php echo $row['client_id'];?>)" class="ico del">Approve</a><a href="#" class="ico edit">Delete</a></td>
 							</tr>
 							<?php
 								}
@@ -106,31 +109,7 @@
 			</div>
 			<!-- End Content -->
 			
-			<!-- Sidebar -->
-			<div id="sidebar">
-				
-				<!-- Box -->
-				<div class="box">
-					
-					<!-- Box Head -->
-					<div class="box-head">
-						<h2>Management</h2>
-					</div>
-					<!-- End Box Head-->
-					
-					<div class="box-content">
-						<a href="#" class="add-button"><span>Send Messages</span></a>
-						<div class="cl">&nbsp;</div>
-						
-						<p class="select-all"><input type="checkbox" class="checkbox" /><label>select all</label></p>
-						<p><a href="#">Delete Selected</a></p>
-						
-						
-					</div>
-				</div>
-				<!-- End Box -->
-			</div>
-			<!-- End Sidebar -->
+			
 			
 			<div class="cl">&nbsp;</div>			
 		</div>
